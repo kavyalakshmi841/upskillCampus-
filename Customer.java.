@@ -1,0 +1,49 @@
+public class Customer {
+
+    private String customerName;
+    private String mobileNumber;
+    private String address;
+    private Account account;
+
+    public Customer(String customerName, String mobileNumber, String address, Account account) {
+        this.customerName = customerName;
+        this.mobileNumber = mobileNumber;
+        this.address = address;
+        this.account = account;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void displayCustomer() {
+        System.out.println("\n===== Customer Details =====");
+        System.out.println("Customer Name : " + customerName);
+        System.out.println("Mobile Number : " + mobileNumber);
+        System.out.println("Address       : " + address);
+
+        if (account != null) {
+            account.displayAccount();
+        }
+    }
+}
