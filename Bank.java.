@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+
+public class Bank {
+
+    private ArrayList<Customer> customers;
+
+    public Bank() {
+        customers = new ArrayList<>();
+    }
+
+    // Add Customer
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+        System.out.println("Customer Registered Successfully.");
+    }
+
+    // Find Customer by Account Number
+    public Customer findCustomer(int accountNumber) {
+
+        for (Customer customer : customers) {
+            if (customer.getAccount().getAccountNumber() == accountNumber) {
+                return customer;
+            }
+        }
+
+        return null;
+    }
+
+    // Display All Customers
+    public void displayAllCustomers() {
+
+        if (customers.isEmpty()) {
+            System.out.println("No Customers Available.");
+            return;
+        }
+
+        System.out.println("\n===== Customer List =====");
+
+        for (Customer customer : customers) {
+            customer.displayCustomer();
+            System.out.println("--------------------------------");
+        }
+    }
+
+    // Deposit Money
+    public void deposit(int accountNumber, double amount) {
+
+        Customer customer = findCustomer(accountNumber);
+
+        if (customer != null) {
+            customer.getAccount().deposit(amount);
+        } else {
+            System.out.println("Account Not Found.");
+        }
+    }
+
+    // Withdraw Money
+    public void withdraw(int accountNumber, double amount) {
+
+        Customer customer = findCustomer(accountNumber);
+
+        if (customer != null) {
+            customer.getAccount().withdraw(amount);
+        } else {
+            System.out.println("Account Not Found.");
+        }
+    }
+
+    // Fund Transfer
+    public void transfer(int senderAcc, int receiverAcc, double amount) {
+
+        Customer sender = findCustomer(senderAcc);
+        Customer receiver = findCustomer(receiverAcc);
+
+        if (sender == null || receiver == null) {
+            System.out.println("Invalid Account Number.");
+            return;
+        }
+
+        Transaction.transfer(sender.getAccount(), receiver.getAccount(), amount);
+    }
+
+    // Delete Customer
+    public void deleteCustomer(int accountNumber) {
+
+        Customer customer = findCustomer(accountNumber);
+
+        if (customer != null) {
+            customers.remove(customer);
+            System.out.println("Customer Deleted Successfully.");
+        } else {
+            System.out.println("Account Not Found.");
+        }
+    }
+}
