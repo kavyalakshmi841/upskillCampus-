@@ -1,0 +1,61 @@
+import java.util.Date;
+
+public class Transaction {
+
+    private String transactionType;
+    private double amount;
+    private Date transactionDate;
+
+    public Transaction(String transactionType, double amount) {
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.transactionDate = new Date();
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void displayTransaction() {
+        System.out.println("\n===== Transaction Details =====");
+        System.out.println("Transaction Type : " + transactionType);
+        System.out.println("Amount           : ₹" + amount);
+        System.out.println("Date             : " + transactionDate);
+    }
+
+    public static void deposit(Account account, double amount) {
+        account.deposit(amount);
+        Transaction transaction = new Transaction("Deposit", amount);
+        transaction.displayTransaction();
+    }
+
+    public static void withdraw(Account account, double amount) {
+        account.withdraw(amount);
+        Transaction transaction = new Transaction("Withdrawal", amount);
+        transaction.displayTransaction();
+    }
+
+    public static void transfer(Account sender, Account receiver, double amount) {
+
+        if (sender.getBalance() >= amount) {
+            sender.withdraw(amount);
+            receiver.deposit(amount);
+
+            Transaction transaction = new Transaction("Fund Transfer", amount);
+
+            System.out.println("\nFund Transfer Successful");
+            transaction.displayTransaction();
+
+        } else {
+            System.out.println("Insufficient Balance.");
+        }
+    }
+}
