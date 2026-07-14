@@ -1,0 +1,59 @@
+public class Account {
+
+    private int accountNumber;
+    private String accountHolderName;
+    private String password;
+    private double balance;
+
+    public Account(int accountNumber, String accountHolderName, String password, double balance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.password = password;
+        this.balance = balance;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Amount Deposited Successfully.");
+        } else {
+            System.out.println("Invalid Amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= balance && amount > 0) {
+            balance -= amount;
+            System.out.println("Amount Withdrawn Successfully.");
+        } else {
+            System.out.println("Insufficient Balance.");
+        }
+    }
+
+    public void displayAccount() {
+        System.out.println("\n===== Account Details =====");
+        System.out.println("Account Number : " + accountNumber);
+        System.out.println("Account Holder : " + accountHolderName);
+        System.out.println("Balance        : ₹" + balance);
+    }
+}
